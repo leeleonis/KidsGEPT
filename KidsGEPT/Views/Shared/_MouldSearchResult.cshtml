@@ -1,0 +1,30 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialMouldSearchResult
+
+<table id="restable" class="table projects-table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th class="text-center font-md">@FrontViewRes._MouldSearchResult._MouldSearchResultZTYPE</th>
+            <th class="text-center font-md">@FrontViewRes._MouldSearchResult._MouldSearchResultZBEMATTYPE</th>
+            <th class="text-center font-md">@FrontViewRes._MouldSearchResult._MouldSearchResultZSPECU</th>
+            <th class="text-center font-md">@FrontViewRes._MouldSearchResult._MouldSearchResultZSPEC</th>
+            <th class="text-right font-md">@FrontViewRes._MouldSearchResult._MouldSearchResultMOQ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(ET_NOMAT item in Model.selectsearchresult)
+        {
+        <tr>
+            <td class="text-center font-md">@item.ZTYPE</td>
+            <td class="text-center font-md">@item.ZBEMATTYPE</td>
+            <td class="text-center font-md">@item.ZSPECU</td>
+            <td class="text-center font-md">@item.ZSPEC</td>
+            <td class="text-right font-md">@item.MOQ</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="well bg-color-teal txt-color-white font-md">
+    @FrontViewRes._MouldSearchResult._MouldSearchResultNote
+</div>

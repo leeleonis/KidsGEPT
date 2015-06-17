@@ -1,0 +1,108 @@
+﻿@model KidsGEPT.Models.Basic
+
+@{
+    ViewBag.Title = "修改基本資料";
+}
+
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-cog"></i> 基本資料維護</h1>
+        </div>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-pencil-square-o"></i> </span>
+                        <h2>修改基本資料</h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+
+                        <div class="widget-body no-padding">
+
+                            @using (Html.BeginForm("Edit", "Basics", new { }, FormMethod.Post, new { @class = "smart-form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                if (Html.ValidationSummary(true) != null)
+                                {
+                                    <div class="alert alert-danger alert-block">
+                                        <h4 class="alert-heading">Error!</h4>
+                                    </div>
+                                }
+                                <fieldset>
+                                    <legend>基本資料</legend>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.BasicID)
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.BasicType, htmlAttributes: new { @class = "col col-1 label" })
+                                        <div class="col-md-10">
+                                            @Html.DropDownList("BasicType", null, null, new { @class = "input" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "col col-1 label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.val, htmlAttributes: new { @class = "col col-1 label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.val, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.val, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        @Html.LabelFor(model => model.memo, htmlAttributes: new { @class = "col col-1 label" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.memo, new { htmlAttributes = new { @class = "input" } })
+                                            @Html.ValidationMessageFor(model => model.memo, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <footer>
+                                    <a class="btn btn-default" href="@Url.Action("index", new { p = ViewBag.pageNumber })">取消</a>
+                                    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i>確認</button>
+                                </footer>
+                            }
+                        </div>
+                        <!-- end widget content -->
+
+                    </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>

@@ -1,0 +1,69 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<KidsGEPT.Models.School>
+
+@{
+    ViewBag.Title = "學校";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("新增學校", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().SchoolID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().SchoolName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Url)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SchoolName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>      
+        <td>
+            @Html.ActionLink("修改", "Edit", new { id=item.SchoolID }) |
+            @Html.ActionLink("內容", "Details", new { id=item.SchoolID }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.SchoolID })
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

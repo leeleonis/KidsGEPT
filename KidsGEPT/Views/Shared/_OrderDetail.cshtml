@@ -1,0 +1,28 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialOrderDetail
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>@FrontViewRes._OrderDetail._OrderDetailMatnr</th>
+                <th width="5%" class="text-right">@FrontViewRes._OrderDetail._OrderDetailAmount</th>
+                <th width="5%" class="text-right">@FrontViewRes._OrderDetail._OrderDetailPrice</th>
+                <th width="5%" class="text-right">@FrontViewRes._OrderDetail._OrderDetailSubtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (orderdetails od in Model.selectorderdetails)
+            {
+                <tr>
+                    <td>@od.matnr</td>
+                    <td class="text-right">@od.quantity</td>
+                    <td class="text-right">@od.unitprice</td>
+                    <td class="text-right">@(Convert.ToDecimal(od.quantity) * Convert.ToDecimal(od.unitprice))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

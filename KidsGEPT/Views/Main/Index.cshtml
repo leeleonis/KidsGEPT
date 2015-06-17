@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts {
+    
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-home"></i> @FrontViewRes.Index.IndexDashboard <span>> @FrontViewRes.Index.IndexMyDashboard</span></h1>
+        </div>
+    </div>
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <div class="row">
+
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- new widget -->
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-calendar"></i> </span>
+                        <h2> NAK </h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+
+                        </div>
+                        <!-- end widget edit box -->
+
+                        <div class="widget-body no-padding">
+                            <!-- content goes here -->
+                            <div class="widget-body-toolbar">
+
+                                <div id="calendar-buttons">
+
+                                    <div class="btn-group">
+                                        <a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-prev"><i class="fa fa-chevron-left"></i></a>
+                                        <a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-today">@ViewBag.WERKS</a>
+                                        <a href="javascript:void(0)" class="btn btn-default btn-xs" id="btn-next"><i class="fa fa-chevron-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="calendar"></div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->

@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>@ViewBag.Title</title>
+
+    <!-- Basic Styles -->
+    @Styles.Render("~/content/smartadmin")
+    <!-- FAVICONS -->
+    <link rel="shortcut icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/content/img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- GOOGLE FONT -->
+    @*<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">*@
+
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="~/content/img/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/content/img/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/content/img/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/content/img/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="~/content/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+</head>
+<body class="fixed-header fixed-navigation">
+    <!-- possible classes: minified, fixed-ribbon, fixed-header, fixed-width-->
+    <!-- HEADER -->
+    <header id="header">
+        <div id="logo-group">
+
+            <!-- PLACE YOUR LOGO HERE -->
+            <span id="logo"> <img src="~/content/img/logo.png" alt="NAK"> </span>
+            <!-- END LOGO PLACEHOLDER -->
+            <!-- AJAX-DROPDOWN : control this dropdown height, look and feel from the LESS variable file -->
+            <div class="ajax-dropdown">
+
+                <!-- footer: refresh area -->
+                <span>
+                    Last updated on: 12/12/2013 9:43AM
+                    <button type="button" data-loading-text="
+                        <i class='fa fa-refresh fa-spin'></i> Loading..." class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                </span>
+                <!-- end footer -->
+
+            </div>
+            <!-- END AJAX-DROPDOWN -->
+        </div>
+
+        <!-- pulled right: nav area -->
+        <div class="pull-right">
+
+            <!-- collapse menu button -->
+            <div id="hide-menu" class="btn-header pull-right">
+                <span> <a href="javascript:void(0);" data-action="toggleMenu" title="Collapse Menu"><i class="fa fa-reorder"></i></a> </span>
+            </div>
+            <!-- end collapse menu -->
+            <!-- #MOBILE -->
+            <!-- Top menu profile link : this shows only when top menu is active -->
+            <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
+                <li class="">
+                    <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
+                        <img src="~/content/img/avatars/sunny.png" alt="John Doe" class="online" />
+                    </a>
+                    <ul class="dropdown-menu pull-right">
+                        <li>
+                            <a href="javascript:void(0);" class="padding-10 padding-top-0 padding-bottom-0" data-action="launchFullscreen"><i class="fa fa-arrows-alt"></i> Full <u>S</u>creen</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="@Url.Action("Logout", "Main")" class="padding-10 padding-top-5 padding-bottom-5" data-action="userLogout"><i class="fa fa-sign-out fa-lg"></i> <strong><u>L</u>ogout</strong></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!-- logout button -->
+            <div id="logout" class="btn-header transparent pull-right">
+                <span> <a href="@Url.Action("Logout", "Main")" title="Sign Out" data-action="userLogout" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+            </div>
+            <!-- end logout button -->
+            <!-- fullscreen button -->
+            <div id="fullscreen" class="btn-header transparent pull-right">
+                <span> <a href="javascript:void(0);" data-action="launchFullscreen" title="Full Screen"><i class="fa fa-arrows-alt"></i></a> </span>
+            </div>
+            <!-- end fullscreen button -->
+            @*@Html.Partial("_Language")*@
+        </div>
+        <!-- end pulled right: nav area -->
+
+    </header>
+    <!-- END HEADER -->
+    <!-- Left panel : Navigation area -->
+    <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+    @Html.Partial("_Leftmenu")
+    <!-- END NAVIGATION -->
+    <!-- MAIN PANEL -->
+    <div id="main" role="main">
+        @Html.Partial("_Ribbon")
+        @RenderBody()
+    </div>
+    <!-- END MAIN PANEL -->
+    <!-- PAGE FOOTER -->
+    <div class="page-footer">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <span class="txt-color-white">NAK © 2015</span>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE FOOTER -->
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="~/scripts/libs/jquery-2.1.1.min.js"></script>
+    <script src="~/scripts/libs/jquery-ui-1.10.3.min.js"></script>
+
+    <!-- IMPORTANT: SmartAdmin Core -->
+    @Scripts.Render("~/scripts/smartadmin")
+
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script data-pace-options='{ "restartOnRequestAfter": true }' src="~/scripts/plugin/pace/pace.min.js"></script>
+    <!-- Demo purpose only! -->
+    <!--<script src="/scripts/demo.min.js"></script>-->
+
+    <!-- SmartChat UI : plugin -->
+    @Scripts.Render("~/scripts/smart-chat")
+    <!-- DataTables : plugin -->
+    @Scripts.Render("~/scripts/datatables")
+    <!-- jQGrid : plugin -->
+    @Scripts.Render("~/scripts/jq-grid")
+    <!-- Forms : plugin -->
+    @Scripts.Render("~/scripts/forms")
+    <!-- Flot Chart Plugin: Flot Engine, Flot Resizer, Flot Tooltip, Morris, Sparkline, EasyPie -->
+    @Scripts.Render("~/scripts/charts")
+    <!-- Vector Maps Plugin: Vectormap engine, Vectormap language -->
+    @Scripts.Render("~/scripts/vector-map")
+    <!-- Full Calendar -->
+    @Scripts.Render("~/scripts/full-calendar")
+    <!-- DO NOT REMOVE : GLOBAL FUNCTIONS! -->
+    <script>
+        $(document).ready(function () {
+            pageSetUp();
+            drawBreadCrumb();
+
+            @*$(".lang").click(function () {
+                var lang = $(this).attr("data-c");
+                var url = location.href;
+                $.post("@Url.Action("SetLang", "Ajax")", {
+                    lang: lang
+                }, function (data) {
+                    location.href = url;
+                });
+            });*@
+        });
+    </script>
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    @RenderSection("scripts", required: false)
+</body>
+</html>

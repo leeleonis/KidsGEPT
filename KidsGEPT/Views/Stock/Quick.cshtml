@@ -1,0 +1,262 @@
+﻿
+@{
+    ViewBag.Title = "料號下單";
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-reorder"></i> @FrontViewRes.Quick.QuickNavInquiry <span>> @FrontViewRes.Quick.QuickNavSearch</span></h1>
+        </div>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-sm-12 col-md-12 col-lg-6">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false">
+
+                    <header>
+                        <h2>@FrontViewRes.Quick.QuickNavSearch</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body">
+                            @using (Ajax.BeginForm("QuickSearch", "Ajax", null, new AjaxOptions { UpdateTargetId = "result", OnBegin = "AjaxBegin", LoadingElementId = "Loading", OnComplete = "AjaxComplete" }, new { @id = "quicksearchform" }))
+                            {
+                                <fieldset>
+
+                                    <div class="note txt-color-red font-md">@FrontViewRes.Quick.QuickNote</div>
+
+                                    <table id="quicktable" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="5%">No.</th>
+                                                <th>@FrontViewRes.Quick.QuickMatnr</th>
+                                                <th>@FrontViewRes.Quick.QuickAmount</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </fieldset>
+
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary" type="submit" id="btnSearch">
+                                                <i class="fa fa-search"></i>
+                                                @FrontViewRes.Quick.QuickButtonSearch
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+        
+
+        <div class="row">
+
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- new widget -->
+                <div class="jarviswidget jarviswidget-color-greenLight" id="wid-id-3" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-collapsed="false" data-widget-sortable="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-search"></i> </span>
+                        <h2> @FrontViewRes.Quick.QuickSearchResult </h2>
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+
+                        </div>
+                        <!-- end widget edit box -->
+
+                        <div class="widget-body no-padding">
+                            <!-- content goes here -->
+
+                            <div class="alert alert-danger" id="Loading" style="display:none;">
+                                <i class="fa-fw fa fa-gear fa-lg fa-spin"></i>
+                                <strong>@FrontViewRes.Quick.QuickLoading...</strong> @FrontViewRes.Quick.QuickPleaseWait
+                            </div>
+
+                            <div class="table-responsive" id="result">
+
+                            </div>
+
+                            <!-- end content -->
+                        </div>
+
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+@section scripts {
+    <script type="text/javascript">
+
+        function AjaxBegin() {
+            $("#result").html('');
+            $("#btnSearch").attr('disabled', true);
+            $("form input").attr('disabled', true);
+        }
+
+        function AjaxComplete() {
+            $("#btnSearch").attr('disabled', false);
+            $("form input").attr('disabled', false);
+        }
+
+        $(document).ready(function () {
+            var t = $("#quicktable").DataTable({
+                paging: false,
+                searching: false,
+                ordering: false,
+                info: false
+            });
+            
+            var counter = $("#quicktable tbody tr").length;
+            var k = 0;
+
+            addrow();
+            addrow();
+            addrow();
+
+            $('form').validateBootstrap(true);
+
+            $("#quicktable").on('change', 'input', function () {
+                if (checkstate()) {
+                    addrow();
+                    $('form').validateBootstrap(true);
+                }
+            });
+
+            $('#result').on('click', '.subsitute', function () {
+                var obj = $(this).parents("tr").find("td");
+                var height = $(this).attr("data-height");
+                var zid = $(this).attr("data-zid");
+                var zod = $(this).attr("data-zod");
+
+                var material;
+
+                switch (obj.eq(2).text())
+                {
+                    case "NBR":
+                        material = "N";
+                        break;
+                    case "FKM":
+                        material = "V";
+                        break;
+                    case "TPU":
+                        material = "U";
+                        break;
+                }
+
+                AjaxBegin();
+                $("#Loading").css("display", "block");
+                $.post("@Url.Action("GetSubsitute", "Ajax")", {
+                    ZTYPE: obj.eq(1).text(),
+                    ZBEMATTYPE: material,
+                    ZSPECU: obj.eq(3).text(),
+                    ZHEIGHT_BE: height,
+                    ZHEIGHT_EN: height,
+                    ZID_H_BE: zid,
+                    ZID_H_EN: zid,
+                    ZOD_H_BE: zod,
+                    ZOD_H_EN: zod
+                }, function (result) {
+                    $("#Loading").css("display", "none");
+                    $("#result").html(result);
+                    AjaxComplete();
+                });
+            });
+
+            $('#widget-grid').on('focus', '.amount', function (e) {
+                $(this)
+                    .one('mouseup', function () {
+                        $(this).select();
+                        return false;
+                    })
+                    .select();
+            });
+
+            $("#widget-grid").on('keydown', '.amount', function (e) {
+                // Allow: backspace, delete, tab, escape, enter and .
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                    // Allow: Ctrl+A
+                    (e.keyCode == 65 && e.ctrlKey === true) ||
+                    // Allow: home, end, left, right, down, up
+                    (e.keyCode >= 35 && e.keyCode <= 40)) {
+                    // let it happen, don't do anything
+                    return;
+                }
+                // Ensure that it is a number and stop the keypress
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+
+                if (($(this).val() == '' && e.keyCode == 96) || ($(this).val() == '' && e.keyCode == 48)) {
+                    e.preventDefault();
+                }
+            });
+
+            function addrow() {
+                t.row.add([
+                    counter,
+                    '<input type=\"text\" class=\"form-control amount\" name=\"quicksearchs[' + k + '].MATNR\" placeholder=\"@FrontViewRes.Quick.QuickMatnr\" maxlength=\"11\" data-val=\"true\" data-val-number=\"必須為有效數字\" />',
+                    '<input type=\"text\" class=\"form-control amount\" name=\"quicksearchs[' + k + '].AMOUNT\" placeholder=\"@FrontViewRes.Quick.QuickAmount\" data-val=\"true\" data-val-regex=\"必須為有效數字\" data-val-regex-pattern=\"^[1-9][0-9]*$\" />'
+                ]).draw();
+                counter++;
+                k++;
+            }
+
+            function checkstate() {
+                var check = true;
+                $("#quicktable input").each(function () {
+                    if ($(this).val() == '') {
+                        check = false;
+                        return false;
+                    }
+                });
+                return check;
+            }
+
+        });
+
+    </script>
+}

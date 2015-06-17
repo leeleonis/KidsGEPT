@@ -1,0 +1,28 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialOrderDetail
+
+<div class="table-responsive">
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>料號</th>
+                <th width="5%" class="text-center">數量</th>
+                <th width="5%" class="text-center">單價</th>
+                <th width="5%" class="text-center">小計</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (orderdetails od in Model.selectorderdetails)
+            {
+                <tr>
+                    <td>@od.matnr</td>
+                    <td class="text-center">@od.quantity</td>
+                    <td class="text-center">@od.unitprice</td>
+                    <td class="text-center">@(Convert.ToDecimal(od.quantity) * Convert.ToDecimal(od.unitprice))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

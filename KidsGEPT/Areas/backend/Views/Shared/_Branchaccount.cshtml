@@ -1,0 +1,25 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialbranchaccountContent
+
+<div class="row invd">
+    <section class="col col-3">
+        <label class="input">
+            <i class="icon-prepend fa fa-folder-open-o"></i>
+            <input placeholder="姓名" type="text" name="branchaccount[@Model.rowkey].title" data-val="true" data-val-required="請輸入姓名">
+            <input type="hidden" name="branchaccount[@Model.rowkey].branchaccountid" value="00000000-0000-0000-0000-000000000000">
+        </label>
+    </section>
+    <section class="col col-3">
+        <label class="input">
+            <input placeholder="E-mail" type="text" name="branchaccount[@Model.rowkey].email" data-val="true" data-val-required="請輸入E-mail">
+        </label>
+    </section>
+    <section class="col col-2">
+        <label class="input">
+            <input placeholder="密碼" type="text" name="branchaccount[@Model.rowkey].password" data-val="true" data-val-required="請輸入密碼">
+        </label>
+    </section>
+    <section class="col col-1">
+        <a href="javascript:;" class="btn btn-danger btn-circle deletedetail"><i class="fa fa-trash-o"></i></a>
+    </section>
+</div>

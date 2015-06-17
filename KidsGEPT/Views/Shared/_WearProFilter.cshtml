@@ -1,0 +1,85 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialItemContent
+
+<div class="dyfield">
+    <div class="col-md-6">
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ZTYPE" name="ZTYPE" value="@Model.selectproducttype.FirstOrDefault().title" placeholder="@FrontViewRes._WearProFilter._WearProFilterZtypePlaceholder" data-val="true" data-val-required="請輸入型式">
+                    <datalist id="ztypelist">
+                        @foreach (producttypes producttype in @Model.selectproducttype)
+                        {
+                            <option value="@producttype.title">@producttype.title</option>
+                        }
+                    </datalist>
+                    <span data-valmsg-for="ZTYPE"></span>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="ZBEMATTYPE" name="ZBEMATTYPE" data-val="true" data-val-required="請選擇材質">
+                        @foreach (materials material in @Model.selectmaterial)
+                        {
+                            <option value="@material.sap">@material.title</option>
+                        }
+                    </select>
+                    <span data-valmsg-for="ZBEMATTYPE"></span>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" id="ZSPECU" name="ZSPECU" data-val="true" data-val-required="請選擇度量">
+                        <option value="mm">@FrontViewRes._WearProFilter._WearProFilterMM</option>
+                        <option value="inch">@FrontViewRes._WearProFilter._WearProFilterInch</option>
+                    </select>
+                    <span data-valmsg-for="ZSPECU"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ZCD_BE" name="ZCD_BE" placeholder="@FrontViewRes._WearProFilter._WearProFilterZCD_BEPlaceholder" data-val="true" data-val-number="必須為有效數字">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ZCD_EN" name="ZCD_EN" placeholder="@FrontViewRes._WearProFilter._WearProFilterZCD_ENPlaceholder" data-val="true" data-val-number="必須為有效數字">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="ZLETTERING_ORI" name="ZLETTERING_ORI" placeholder="@FrontViewRes._WearProFilter._WearProFilterZLETTERING_ORIPlaceholder">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="superbox col-md-6"></div>
+    
+</div>
+
+<script type="text/javascript">
+    $(function () {
+
+        $('.dyfield').on('blur', '#ZTYPE', function () {
+            var ztype = $(this).val();
+
+            if (ztype != '')
+            {
+                $.post("@Url.Action("GetTypeImage", "Ajax")", { ztype: ztype }, function(result) {
+                    $(".superbox").html(result);
+                });
+            }else
+            {
+                $(".superbox").html("");
+            }
+        });
+
+        $("#ZCD_BE").blur(function () {
+
+            if ($("#ZCD_EN").val() == '') {
+                $("#ZCD_EN").val($("#ZCD_BE").val());
+            }
+        });
+    });
+</script>

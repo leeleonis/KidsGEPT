@@ -1,0 +1,626 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KidsGEPTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Basic">
+          <Key>
+            <PropertyRef Name="BasicID" />
+          </Key>
+          <Property Name="BasicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BasicType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="val" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="memo" Type="text" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="PID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Pwd" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Cname" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Alias" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Birthday" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="SchoolID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Grade" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="memo" Type="text" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TLevel" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Testdt" Type="date" Nullable="false" />
+          <Property Name="Regsdt" Type="datetime" Nullable="false" />
+          <Property Name="Regedt" Type="datetime" Nullable="false" />
+          <Property Name="memo" Type="text" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar(max)" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Tel" Type="nvarchar" MaxLength="15" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="ScoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestID" Type="int" Nullable="false" />
+          <Property Name="ListenScore" Type="int" />
+          <Property Name="ReadScore" Type="int" />
+          <Property Name="SayScore" Type="int" />
+          <Property Name="WriteScore" Type="int" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="No" />
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="No" Type="int" Nullable="false" />
+          <Property Name="TestID" Type="int" Nullable="false" />
+          <Property Name="BasicID" Type="int" Nullable="false" />
+          <Property Name="SpecialCheck" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="memo" Type="text" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="PID" />
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="TestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PID" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ScheduleID" Type="int" Nullable="false" />
+          <Property Name="TestArea" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="TestIdentity" Type="nvarchar" MaxLength="10" />
+          <Property Name="TestState" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ticket" Type="nvarchar" MaxLength="10" />
+          <Property Name="SMS" Type="nvarchar" MaxLength="1" />
+          <Property Name="EDM" Type="nvarchar" MaxLength="1" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="family" Type="text" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="memo" Type="text" />
+          <Property Name="CreateID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Createdt" Type="datetime" />
+          <Property Name="UpdateID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Updatedt" Type="datetime" />
+          <Property Name="DisableID" Type="nvarchar" MaxLength="50" />
+          <Property Name="Disabledt" Type="datetime" />
+          <Property Name="Disable" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_Member_school">
+          <End Role="School" Type="Self.School" Multiplicity="1" />
+          <End Role="Member" Type="Self.Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Member">
+          <End Role="Member" Type="Self.Member" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Score">
+          <End Role="Score" Type="Self.Score" Multiplicity="1" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Score">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KidsGEPTModelStoreContainer">
+          <EntitySet Name="Basic" EntityType="Self.Basic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Member" EntityType="Self.Member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Special" EntityType="Self.Special" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Member_school" Association="Self.FK_Member_school">
+            <End Role="School" EntitySet="School" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Member" Association="Self.FK_Test_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Schedule" Association="Self.FK_Test_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Score" Association="Self.FK_Test_Score">
+            <End Role="Score" EntitySet="Score" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KidsGEPTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="KidsGEPTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Member" EntityType="KidsGEPTModel.Member" />
+          <EntitySet Name="Schedule" EntityType="KidsGEPTModel.Schedule" />
+          <EntitySet Name="School" EntityType="KidsGEPTModel.School" />
+          <EntitySet Name="Score" EntityType="KidsGEPTModel.Score" />
+          <EntitySet Name="Special" EntityType="KidsGEPTModel.Special" />
+          <EntitySet Name="Test" EntityType="KidsGEPTModel.Test" />
+          <AssociationSet Name="FK_Member_school" Association="KidsGEPTModel.FK_Member_school">
+            <End Role="School" EntitySet="School" />
+            <End Role="Member" EntitySet="Member" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Member" Association="KidsGEPTModel.FK_Test_Member">
+            <End Role="Member" EntitySet="Member" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Schedule" Association="KidsGEPTModel.FK_Test_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Score" Association="KidsGEPTModel.FK_Test_Score">
+            <End Role="Score" EntitySet="Score" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+          <EntitySet Name="Basic" EntityType="KidsGEPTModel.Basic" />
+        </EntityContainer>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="PID" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Pwd" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cname" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Alias" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolID" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="School" Relationship="KidsGEPTModel.FK_Member_school" FromRole="Member" ToRole="School" />
+          <NavigationProperty Name="Test" Relationship="KidsGEPTModel.FK_Test_Member" FromRole="Member" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TLevel" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Testdt" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Regsdt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Regedt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Test" Relationship="KidsGEPTModel.FK_Test_Schedule" FromRole="Schedule" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolID" />
+          </Key>
+          <Property Name="SchoolID" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="KidsGEPTModel.FK_Member_school" FromRole="School" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="ScoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestID" Type="Int32" Nullable="false" />
+          <Property Name="ListenScore" Type="Int32" />
+          <Property Name="ReadScore" Type="Int32" />
+          <Property Name="SayScore" Type="Int32" />
+          <Property Name="WriteScore" Type="Int32" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Test" Relationship="KidsGEPTModel.FK_Test_Score" FromRole="Score" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="Special">
+          <Key>
+            <PropertyRef Name="No" />
+            <PropertyRef Name="TestID" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" />
+          <Property Name="TestID" Type="Int32" Nullable="false" />
+          <Property Name="BasicID" Type="Int32" Nullable="false" />
+          <Property Name="SpecialCheck" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="PID" />
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="TestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PID" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" />
+          <Property Name="TestArea" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TestIdentity" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TestState" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Ticket" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="SMS" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EDM" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="GroupCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="family" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="KidsGEPTModel.FK_Test_Member" FromRole="Test" ToRole="Member" />
+          <NavigationProperty Name="Schedule" Relationship="KidsGEPTModel.FK_Test_Schedule" FromRole="Test" ToRole="Schedule" />
+          <NavigationProperty Name="Score" Relationship="KidsGEPTModel.FK_Test_Score" FromRole="Test" ToRole="Score" />
+        </EntityType>
+        <Association Name="FK_Member_school">
+          <End Type="KidsGEPTModel.School" Role="School" Multiplicity="1" />
+          <End Type="KidsGEPTModel.Member" Role="Member" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Member">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Member">
+          <End Type="KidsGEPTModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="KidsGEPTModel.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="PID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="PID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Schedule">
+          <End Type="KidsGEPTModel.Schedule" Role="Schedule" Multiplicity="1" />
+          <End Type="KidsGEPTModel.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="ScheduleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Score">
+          <End Type="KidsGEPTModel.Score" Role="Score" Multiplicity="1" />
+          <End Type="KidsGEPTModel.Test" Role="Test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Score">
+              <PropertyRef Name="TestID" />
+            </Principal>
+            <Dependent Role="Test">
+              <PropertyRef Name="TestID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Basic">
+          <Key>
+            <PropertyRef Name="BasicID" />
+          </Key>
+          <Property Name="BasicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BasicType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="val" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="memo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CreateID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Createdt" Type="DateTime" Precision="3" />
+          <Property Name="UpdateID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Updatedt" Type="DateTime" Precision="3" />
+          <Property Name="DisableID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Disabledt" Type="DateTime" Precision="3" />
+          <Property Name="Disable" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KidsGEPTModelStoreContainer" CdmEntityContainer="KidsGEPTEntities">
+          <EntitySetMapping Name="Member">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Member">
+              <MappingFragment StoreEntitySet="Member">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Cname" ColumnName="Cname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="Regedt" ColumnName="Regedt" />
+                <ScalarProperty Name="Regsdt" ColumnName="Regsdt" />
+                <ScalarProperty Name="Testdt" ColumnName="Testdt" />
+                <ScalarProperty Name="TLevel" ColumnName="TLevel" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="School">
+            <EntityTypeMapping TypeName="KidsGEPTModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Score">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="WriteScore" ColumnName="WriteScore" />
+                <ScalarProperty Name="SayScore" ColumnName="SayScore" />
+                <ScalarProperty Name="ReadScore" ColumnName="ReadScore" />
+                <ScalarProperty Name="ListenScore" ColumnName="ListenScore" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Special">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Special">
+              <MappingFragment StoreEntitySet="Special">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="SpecialCheck" ColumnName="SpecialCheck" />
+                <ScalarProperty Name="BasicID" ColumnName="BasicID" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+                <ScalarProperty Name="No" ColumnName="No" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="family" ColumnName="family" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="EDM" ColumnName="EDM" />
+                <ScalarProperty Name="SMS" ColumnName="SMS" />
+                <ScalarProperty Name="Ticket" ColumnName="Ticket" />
+                <ScalarProperty Name="TestState" ColumnName="TestState" />
+                <ScalarProperty Name="TestIdentity" ColumnName="TestIdentity" />
+                <ScalarProperty Name="TestArea" ColumnName="TestArea" />
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="PID" ColumnName="PID" />
+                <ScalarProperty Name="TestID" ColumnName="TestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Basic">
+            <EntityTypeMapping TypeName="KidsGEPTModel.Basic">
+              <MappingFragment StoreEntitySet="Basic">
+                <ScalarProperty Name="Disable" ColumnName="Disable" />
+                <ScalarProperty Name="Disabledt" ColumnName="Disabledt" />
+                <ScalarProperty Name="DisableID" ColumnName="DisableID" />
+                <ScalarProperty Name="Updatedt" ColumnName="Updatedt" />
+                <ScalarProperty Name="UpdateID" ColumnName="UpdateID" />
+                <ScalarProperty Name="Createdt" ColumnName="Createdt" />
+                <ScalarProperty Name="CreateID" ColumnName="CreateID" />
+                <ScalarProperty Name="memo" ColumnName="memo" />
+                <ScalarProperty Name="val" ColumnName="val" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BasicType" ColumnName="BasicType" />
+                <ScalarProperty Name="BasicID" ColumnName="BasicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

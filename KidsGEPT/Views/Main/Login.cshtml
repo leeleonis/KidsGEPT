@@ -1,0 +1,119 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html class='no-js' lang='zh-TW'>
+<head>
+    <meta charset='utf-8'>
+    <title>NAK SEALING TECHNOLOGIES CORPORATION E-SHOP</title>
+    <meta content='width=device-width, initial-scale=1.0' name='viewport'>
+    <link href="~/Login/stylesheets/all.css" media="screen" rel="stylesheet" type="text/css" />
+    <!--[if IE]>
+      <link href="~/Login/stylesheets/ie.css" media="screen" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id='wrapper'>
+        <main>
+            <section>
+                <div class='row'>
+                    <div class='grid g-8-12' id='main'>
+                        <div class='row'>
+                            <div class='grid hero-image'>
+                                <div class='content right'>
+                                    <div class='content-inner'>
+                                        <img src='~/Login/images/components/nak-poster.png'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class='grid hero-content'>
+                                <div class='content'>
+                                    <div class='content-inner'>
+                                        <h1>NAK SEALING TECHNOLOGIES CORPORATION INTRODUCTION VIDEO 2015</h1>
+                                        <p>@FrontViewRes.Login.Logindescription</p>
+                                        <video class='video-js vjs-default-skin' data-setup='{ "controls": true, "autoplay": true, "preload": "auto" }' height='auto' id='video' width='auto'>
+                                            <source src='~/Login/video.mp4' type='video/mp4'></source>
+                                            <p class='vjs-no-js'>
+                                                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                                                <a href='http://videojs.com/html5-video-support/' target='_blank'>Supports HTML5 video</a>
+                                            </p>
+                                        </video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='grid g-4-12' id='sidebar'>
+                        <div class='content'>
+                            <div class='content-inner'>
+                                <div class='brand'>
+                                    <a href='/'>
+                                        <img src='~/Login/images/components/nak-brand-logo.png'>
+                                    </a>
+                                </div>
+                                <h4>
+                                    NAK SEALING TECHNOLOGIES
+                                    <br>
+                                    CORPORATION E-SHOP
+                                </h4>
+                                @using (Html.BeginForm("Login", "Main", FormMethod.Post, new { @id = "login-form" }))
+                                {
+                                <div class='form-wrapper'>
+                                    <div class='controlgroup'>
+                                        <label></label>
+                                        <div class='controls'>
+                                            @Html.TextBox("email", "", new { @type = "text", placeholder = FrontViewRes.Login.Loginformemail })
+                                            <div class='icons-user'></div>
+                                        </div>
+                                    </div>
+                                    <div class='controlgroup'>
+                                        <label></label>
+                                        <div class='controls'>
+                                            @Html.Password("password", "", new { @type = "password", placeholder = FrontViewRes.Login.Loginformpassword })
+                                            <div class='icons-password'></div>
+                                        </div>
+                                    </div>
+                                    <div class='controlgroup'>
+                                        <div class='controls'>
+                                            <input class='btn basic' type='submit' value='@FrontViewRes.Login.Loginformsignin'>
+                                        </div>
+                                    </div>
+                                    <div class='controlgroup'>
+                                        <div class='controls right'>
+                                            <input id='remember-check' type='checkbox' name="rememberme" value="true" checked="checked">
+                                            <label for='remember-check'>@FrontViewRes.Login.Loginrememberme</label>
+                                            <input type="hidden" name="rememberme" value="false" />
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                <div class='copyrights'>Copyright NAK Sealing Technologies Corporation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer></footer>
+    </div>
+    <script src="~/Login/javascripts/jquery.js" type="text/javascript"></script>
+    <script src="~/Login/javascripts/viewport.js" type="text/javascript"></script>
+    <script src="~/Login/javascripts/video.js" type="text/javascript"></script>
+    <!-- /Plugins which always uses. -->
+    <!-- /Slidebar -->
+    <script src="~/Login/javascripts/slidebars.min.js" type="text/javascript"></script>
+    <!-- /Sticky -->
+    <script src="~/Login/javascripts/jquery.sticky.js" type="text/javascript"></script>
+    <!-- /Bxslider -->
+    <script src="~/Login/javascripts/jquery.bxslider.min.js" type="text/javascript"></script>
+    <!-- /Triggers -->
+    <script src="~/Login/javascripts/all.js" type="text/javascript"></script>
+    <!-- /= livereload_js -->
+</body>
+</html>

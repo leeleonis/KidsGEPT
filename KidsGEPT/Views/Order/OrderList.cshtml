@@ -1,0 +1,128 @@
+﻿@using KidsGEPT.Models
+@using KidsGEPT.Common
+
+@{
+    ViewBag.Title = "歷史訂單";
+    var data = ViewBag.Orders as IEnumerable<orders>;
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-history"></i> @FrontViewRes.OrderList.OrderListTitle</h1>
+        </div>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <div class="well padding-10">
+
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        @if (Html.ValidationSummary(true) != null)
+                        {
+                            <div class="alert alert-danger no-margin fade in">
+                                <button class="close" data-dismiss="alert">
+                                    ×
+                                </button>
+                                <i class="fa-fw fa fa-info"></i>
+                                @Html.ValidationSummary(true)
+                            </div>
+                        }
+                        <div class="table-responsive">
+
+                            <table id="ordertable" class="table table-hover table-bordered table-striped smart-form">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">@FrontViewRes.OrderList.OrderListOrderDate</th>
+                                        <th>@FrontViewRes.OrderList.OrderListOrderNumber</th>
+                                        <th width="6%" class="text-center">@FrontViewRes.OrderList.OrderListOrderStatus</th>
+                                        <th width="5%" class="text-center">@FrontViewRes.OrderList.OrderListPrint</th>
+                                        <th width="5%" class="text-center">@FrontViewRes.OrderList.OrderListDetail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(orders order in data)
+                                    { 
+                                    <tr id="@order.orderid">
+                                        <td>@Convert.ToDateTime(order.orderdate).ToString("yyyy-MM-dd")</td>
+                                        <td>@order.ordernumber</td>
+                                        <td class="text-center">
+                                            @if ((int)OrderStatus.StockUp == (int)order.status)
+                                            {
+                                            <span class="text-primary">@FrontViewRes.OrderList.OrderListOrderStatusStockup</span>
+                                            }
+                                            else if ((int)OrderStatus.Shipped == (int)order.status)
+                                            {
+                                            <span class="text-success">@FrontViewRes.OrderList.OrderListOrderStatusShipped</span>
+                                            }
+                                        </td>
+                                        <td class="text-center"><a href="@Url.Action("Print", "Order", new { orderid = order.orderid })" class="btn btn-default btn-xs" target="_blank"><i class="fa fa-print"></i></a></td>
+                                        <td class="details-control"></td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+
+            </article>
+            <!-- WIDGET END -->
+            
+        </div>
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+@section scripts {
+<script type="text/javascript">
+    $(function () {
+
+        var table = $('#ordertable').DataTable({
+            paging: true,
+            ordering: false,
+            info: false
+        });
+
+        function format(d) {
+           
+            var res;
+            $.ajaxSetup({ async:false });
+            $.post("@Url.Action("GetOrderDetail", "Ajax")", { orderid: d }, function (result) {
+                res = result;
+            });
+            $.ajaxSetup({ async:true });
+            return res;
+        }
+
+        $('#ordertable tbody').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row(tr);
+
+            if (row.child.isShown()) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            } else {
+                // Open this row
+                row.child(format(tr.attr("id"))).show();
+                tr.addClass('shown');
+            }
+        });
+    });
+</script>
+}

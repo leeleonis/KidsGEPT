@@ -1,0 +1,124 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialSearchResult
+
+<form id="searchresultform">
+    <table id="restable" class="table projects-table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultMATNR</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultZTYPE</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultZBEMATTYPE</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultZSPECU</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultZSPEC</th>
+                <th class="text-right font-md">@FrontViewRes._SubsituteResult._SubsituteResultCLABS</th>
+                <th class="text-right font-md">@FrontViewRes._SubsituteResult._SubsituteResultPRICE (@Session["currency"])</th>
+                <th class="text-right font-md" width="6%">@FrontViewRes._SubsituteResult._SubsituteResultAMOUNT</th>
+                <th class="text-right font-md">@FrontViewRes._SubsituteResult._SubsituteResultSUBTOTAL</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultDELIVERDATE</th>
+                <th class="text-center font-md">@FrontViewRes._SubsituteResult._SubsituteResultCart</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (IT_ZTMARA item in Model.selectsearchresult)
+            {
+                <tr data-id="@item.ZTYPE">
+                    <td>@item.ZOD_H</td>
+                    <td>@item.ZID_H</td>
+                    <td>@item.ZHEIGHT_H</td>
+                    <td class="text-center font-md">@item.MATNR</td>
+                    <td class="text-center font-md">@item.ZTYPE</td>
+                    <td class="text-center font-md">@item.ZBEMATTYPE</td>
+                    <td class="text-center font-md">@item.ZSPECU</td>
+                    <td class="text-center font-md">@item.ZSPEC</td>
+                    <td class="text-right font-md">@item.CLABS</td>
+                    <td class="text-right font-md">@item.PRICE</td>
+                    <td><input type="text" class="form-control text-right amount" placeholder="@FrontViewRes._SubsituteResult._SubsituteResultAMOUNT" value="@item.AMOUNT" data-val="true" data-val-required="請輸入數量" data-val-regex="必須為有效數字" data-val-regex-pattern="^[1-9][0-9]*$" /></td>
+                    <td class="text-right font-md">@(item.AMOUNT != "" ? (Convert.ToDecimal(item.PRICE) * Convert.ToDecimal(item.AMOUNT)).ToString() : "0")</td>
+                    <td class="text-center font-md">@item.DELIVERDATE</td>
+                    <td class="text-center"><a href="javascript:;" class="btn btn-xs btn-danger addcart" rel="tooltip" data-placement="top" data-original-title="@FrontViewRes._SubsituteResult._SubsituteResultAddtoCart"><i class="fa fa-shopping-cart"></i></a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
+
+<script type="text/javascript">
+    $(function () {
+        $("#restable").dataTable({
+            paging: false,
+            searching: false,
+            info: false,
+            order: [[0, "asc"], [1, "asc"], [2, "asc"]],
+            columnDefs: [
+                {
+                    targets: [0],
+                    visible: false
+                }, {
+                    targets: [1],
+                    visible: false
+                }, {
+                    targets: [2],
+                    visible: false
+                }
+            ]
+        });
+
+        $("[rel=tooltip]").tooltip();
+
+        $('#searchresultform').validateBootstrap(true);
+
+        $(".amount").keyup(function () {
+            var amount = $(this).val();
+            var obj = $(this).parents("tr").find("td");
+
+            var num = obj.eq(6).text() * amount;
+            obj.eq(8).html(Math.floor(num * 100)/100);
+        });
+
+        $("#restable").on('click', '.addcart', function () {
+            var obj = $(this).parents("tr").find("td");
+            var stock = obj.eq(5).text();
+            var amount = obj.eq(7).find("input").val();
+
+            if (amount == "" || parseInt(amount) == 0)
+            {
+                alert("@FrontViewRes._SubsituteResult._SubsituteResultAmountError");
+                return false;
+            }
+
+            if (parseInt(amount) > parseInt(stock)) {
+                alert("@FrontViewRes._SubsituteResult._SubsituteResultCLABS:" + stock + ";@FrontViewRes._SubsituteResult._SubsituteResultAMOUNT:" + amount + "; @FrontViewRes._SubsituteResult._SubsituteResultClabsError");
+                return false;
+            }
+
+            $.post("@Url.Action("AddToCart", "Ajax")", {
+                MATNR: obj.eq(0).text(),
+                ZTYPE: obj.eq(1).text(),
+                ZBEMATTYPE: obj.eq(2).text(),
+                ZSPECU: obj.eq(3).text(),
+                ZSPEC: obj.eq(4).text(),
+                CLABS: obj.eq(5).text(),
+                PRICE: obj.eq(6).text(),
+                AMOUNT: amount,
+                SUBTOTAL: obj.eq(8).text(),
+                DELIVERDATE: obj.eq(9).text()
+            }, function (result) {
+                if (result == "200") {
+                    $.smallBox({
+                        title: obj.eq(1).text() + " " + amount + "pcs",
+                        content: "<i class='fa fa-shopping-cart'></i> <i>" + obj.eq(9).text() + "</i>",
+                        color: "#296191",
+                        iconSmall: "fa fa-thumbs-up bounce animated",
+                        timeout: 3000
+                    });
+                } else if (result == "220") {
+                    alert("@FrontViewRes._SubsituteResult._SubsituteResultMATNR:" + obj.eq(0).text() + " @FrontViewRes._SubsituteResult._SubsituteResultMatnrError");
+                }
+                return false;
+            });
+        });
+    });
+</script>

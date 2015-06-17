@@ -1,0 +1,169 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex,nofollow">
+    <title>KidsGEPT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Basic Styles -->
+    @Styles.Render("~/backend/content/smartadmin")
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="~/areas/backend/content/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="~/areas/backend/content/img/favicon/favicon.ico" type="image/x-icon">
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <!-- #APP SCREEN / ICONS -->
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="~/areas/backend/content/img/splash/sptouch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/areas/backend/content/img/splash/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/areas/backend/content/img/splash/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/areas/backend/content/img/splash/touch-icon-ipad-retina.png">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="~/areas/backend/content/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="~/areas/backend/content/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="~/areas/backend/content/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+</head>
+<body class="animated fadeInDown">
+
+    <header id="header">
+
+        <div id="logo-group">
+            <span id="logo"> <img src="~/areas/backend/content/img/logo.png" alt="NAK"> </span>
+        </div>
+
+    </header>
+
+    <div id="main" role="main">
+
+        <!-- MAIN CONTENT -->
+        <div id="content" class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
+                    <h1 class="txt-color-red login-header-big">@ViewRes.Login.Logintitle</h1>
+                    <div class="hero">
+
+                        <div class="pull-left login-desc-box-l">
+                            <h4 class="paragraph-header">@ViewRes.Login.Logindescription</h4>
+                        </div>
+                        
+                        <!--<img src="~/areas/backend/content/img/demo/iphoneview.png" class="pull-right display-image" alt="" style="width:210px">-->
+
+                    </div>
+
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+                    <div class="well no-padding">
+                        @using (Html.BeginForm("Login", "Main", FormMethod.Post, new { @id = "login-form", @class = "smart-form client-form" }))
+                        {
+                            <header>
+                                @ViewRes.Login.Loginformtitle
+                            </header>
+
+                            if (Html.ValidationSummary(true) != null)
+                            {
+                                <div class="alert alert-danger alert-block">
+                                    <h4 class="alert-heading">Error!</h4>
+                                    @Html.ValidationSummary(true)
+                                </div>
+                            }
+
+                            <fieldset>
+
+                                <section>
+                                    <label class="label">@ViewRes.Login.LoginformPID</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-user"></i>
+                                        @Html.TextBox("PID", "", new { @type = "text" })
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> @ViewRes.Login.LoginformPID</b>
+                                    </label>
+                                </section>
+
+                                <section>
+                                    <label class="label">@ViewRes.Login.Loginformpassword</label>
+                                    <label class="input">
+                                        <i class="icon-append fa fa-lock"></i>
+                                        @Html.Password("password", "", new { @type = "password" })
+                                        <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> @ViewRes.Login.Loginpasswordvalidate</b>
+                                    </label>
+                                </section>
+
+                            </fieldset>
+
+                            <footer>
+                                <input type="submit" value="@ViewRes.Login.Loginformsignin" class="btn btn-primary" />
+                            </footer>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--================================================== -->
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script> if (!window.jQuery) { document.write('<script src="/scripts/libs/jquery-2.1.1.min.js"><\/script>'); } </script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script> if (!window.jQuery.ui) { document.write('<script src="/scripts/libs/jquery-ui-1.10.3.min.js"><\/script>'); } </script>
+
+    <!-- IMPORTANT: SmartAdmin Core -->
+    @Scripts.Render("~/scripts/smartadmin")
+
+    <script type="text/javascript">
+        pageSetUp();
+
+        $(function () {
+            // Validation
+            $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    password: {
+                        required: 'Please enter your password'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

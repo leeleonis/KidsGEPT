@@ -1,0 +1,172 @@
+﻿@using KidsGEPT.Models;
+
+@{
+    ViewBag.Title = "我的購物車";
+    var data = ViewBag.Carts as IEnumerable<carts>;
+    int x = 0;
+    decimal y = 0;
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-shopping-cart"></i> @FrontViewRes.ShoppingList.ShoppingListNav</h1>
+        </div>
+    </div>
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <div class="alert alert-danger" id="Loading" style="display:none;">
+            <i class="fa-fw fa fa-gear fa-lg fa-spin"></i>
+            <strong>Loading...</strong> Please wait.
+        </div>
+
+        <div class="well">
+
+            <fieldset>
+
+                <div class="table-responsive">
+
+                    <table id="carttable" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListMatnr</th>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListZtype</th>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListZbemattype</th>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListZspecu</th>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListZspec</th>
+                                <th class="text-right">@FrontViewRes.ShoppingList.ShoppingListClabs</th>
+                                <th class="text-right">@FrontViewRes.ShoppingList.ShoppingListPrice</th>
+                                <th class="text-right">@FrontViewRes.ShoppingList.ShoppingListAmount</th>
+                                <th class="text-right">@FrontViewRes.ShoppingList.ShoppingListSubtotal</th>
+                                <th class="text-center">@FrontViewRes.ShoppingList.ShoppingListDeliverdate</th>
+                                <th width="5%" class="text-center">@FrontViewRes.ShoppingList.ShoppingListDelete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (carts item in data)
+                            {
+                                <tr class="cartitem">
+                                    <td class="text-center">@item.matnr</td>
+                                    <td class="text-center">@item.ztype</td>
+                                    <td class="text-center">@item.zbemattype</td>
+                                    <td class="text-center">@item.zspecu</td>
+                                    <td class="text-center">@item.zspec</td>
+                                    <td class="text-right">@item.clabs</td>
+                                    <td class="text-right">@item.price</td>
+                                    <td class="text-right">@item.amount</td>
+                                    <td class="text-right">@item.subtotal</td>
+                                    <td class="text-center">@item.deliverdate</td>
+                                    <td class="text-center"><a href="#confirm-delete" class="btn btn-danger btn-xs del" data-toggle="modal" data-id="@item.cartid"><i class="fa fa-trash-o"></i></a></td>
+                                </tr>
+                                x = x + Convert.ToInt32(item.amount);
+                                y = y + Convert.ToDecimal(item.subtotal);
+                            }
+                            <tr>
+                                <td colspan="7"></td>
+                                <td class="text-right"><strong>@x</strong></td>
+                                <td class="text-right"><strong>@y</strong></td>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </fieldset>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="@Url.Action("Print", "Shopping")" class="btn btn-default" target="_blank">
+                            <i class="fa fa-print"></i>
+                            @FrontViewRes.ShoppingList.ShoppingListButtonPrint
+                        </a>
+                        <button class="btn btn-primary" type="submit" id="btnOrder">
+                            <i class="fa fa-search"></i>
+                            @FrontViewRes.ShoppingList.ShoppingListButtonConfirm
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- Modal -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">@FrontViewRes.ShoppingList.ShoppingListWarnConfirm</h4>
+            </div>
+            <div class="modal-body">
+
+                <p>
+                    @FrontViewRes.ShoppingList.ShoppingListAreYouSure
+                </p>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    @FrontViewRes.ShoppingList.ShoppingListButtonCancel
+                </button>
+                <a href="#" class="btn btn-primary">
+                    @FrontViewRes.ShoppingList.ShoppingListButtonYes
+                </a>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@section scripts {
+<script type="text/javascript">
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+    $(document).ready(function () {
+        pageSetUp();
+
+        $(document).on('click', '#btnOrder', function () {
+            var rowcount = $("#carttable .cartitem").length;
+
+            if (rowcount > 0) {
+                $("#Loading").show();
+
+                $("#btnOrder").attr('disabled', true);
+
+                $.post("@Url.Action("Order", "Ajax")", function(result) {
+                    $("#Loading").hide();
+
+                    if (result.code == "200")
+                    {
+                        alert("@FrontViewRes.ShoppingList.ShoppingListSuccess");
+                        window.location.href = '/order/orderlist';
+
+                    } else if(result.code == "210"){
+                        alert("@FrontViewRes.ShoppingList.ShoppingListStockError");
+                    } else{
+                        alert(result.code + "; " + result.data);
+                    }
+                    
+                    $("#btnOrder").attr('disabled', false);
+                });
+            }
+        });
+
+        $('.del').on('click', function () {
+            var myId = $(this).data('id');
+            $("#confirm-delete .modal-footer a").attr("href", "/Shopping/CartDelete?cartid=" + myId);
+        })
+    })
+</script>
+}

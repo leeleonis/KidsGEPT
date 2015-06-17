@@ -1,0 +1,24 @@
+﻿@model KidsGEPT.Common.PartialNoResult
+
+<div class="alert alert-info alert-block">
+    <a class="close" data-dismiss="alert" href="#">×</a>
+    <h4 class="alert-heading">@FrontViewRes._NoResult._NoResultSorry</h4>
+    @FrontViewRes._NoResult._NoResultNoData
+    @if(Model.rowkey != 0)
+    {
+        <p class="text-align-left">
+            <br>
+            <ul class="demo-btns">
+                <li>
+                    <a href="javascript:void(0);" class="btn btn-lg btn-primary subsitute"><i class="fa fa-exchange"></i> @FrontViewRes._NoResult._NoResultSubstitute</a>
+                </li>
+                @if (Model.rowkey != 2 && Model.rowkey != 3 && Model.rowkey != 4)
+                {
+                    <li>
+                        <a href="javascript:void(0);" class="btn btn-lg btn-success mould"><i class="fa fa-cube"></i> @FrontViewRes._NoResult._NoResultMould</a>
+                    </li>
+                }
+            </ul>
+        </p> 
+    }
+</div>

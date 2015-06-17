@@ -1,0 +1,21 @@
+﻿@using KidsGEPT.Models
+@model KidsGEPT.Common.PartialbranchaccountContent
+
+<div class="row invd">
+    <section class="col col-3">
+        <label class="input">
+            <i class="icon-prepend fa fa-folder-open-o"></i>
+            <input placeholder="姓名" type="text" name="dealernotifys[@Model.rowkey].name" data-val="true" data-val-required="請輸入姓名">
+            <input type="hidden" name="dealernotifys[@Model.rowkey].dealernotifyid" value="00000000-0000-0000-0000-000000000000">
+        </label>
+    </section>
+    <section class="col col-3">
+        <label class="input">
+            <input placeholder="E-mail" type="text" name="dealernotifys[@Model.rowkey].email" data-val="true" data-val-required="請輸入E-mail">
+        </label>
+    </section>
+    <section class="col col-1">
+        <a href="javascript:;" class="btn btn-danger btn-circle deletedetail"><i class="fa fa-trash-o"></i></a>
+    </section>
+</div>
+

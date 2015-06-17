@@ -1,0 +1,108 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model PagedList.StaticPagedList<KidsGEPT.Models.Basic>
+
+@{
+    ViewBag.Title = "基本檔設定";
+}
+<div id="content">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa-fw fa fa-cog"></i> 基本檔設定</h1>
+        </div>
+    </div>
+
+    <div class="row well">
+        <form class="form" role="form">
+            <div class="col-lg-3">
+                <div class="input-group">
+                    <span class="input-group-addon"></span>
+                    @Html.DropDownList("typeselect", null, "全部", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <button type="submit" id="ButtonSubmit" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span> 查詢
+                </button>
+            </div>
+        </form>
+    </div>
+    <section id="widget-grid" class="">
+        <!-- row -->
+        <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+                <div class="well padding-10">
+
+                    <!-- widget content -->
+                    <div class="widget-body">
+
+                        <div class="widget-body-toolbar">
+
+                            <div class="row">
+
+                                <div class="col-sm-1">
+                                    <a class="btn btn-success btn-labeled" href="@Url.Action("Create", "basics")"> <span class="btn-label"><i class="glyphicon glyphicon-plus"></i></span>新增基本資料 </a>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered table-striped">
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FirstOrDefault().Name)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FirstOrDefault().val)
+                                    </th>
+                                    <th width="8%" class="text-center"></th>
+                                    <th width="8%" class="text-center"></th>
+                                    <th width="8%" class="text-center"></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.val)
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-labeled" href="@Url.Action("Edit", "basics", new { id = item.BasicID })">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-pencil"></i></span>修改
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info btn-labeled" href="@Url.Action("Details", "basics", new { id = item.BasicID })">
+                                                <span class="btn-label"><i class="glyphicon glyphicon-eye-open"></i></span>內容
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-danger btn-labeled" href="@Url.Action("Delete", "basics", new { id = item.BasicID })" onclick="return confirm('是否確定刪除')">
+                                                <span class=" btn-label"><i class="glyphicon glyphicon-trash"></i></span>刪除
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+
+                        <div class="text-center">
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page, typeselect = ViewBag.typeselected, }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+            </article>
+            <!-- WIDGET END -->
+        </div>
+        <!-- end row -->
+
+    </section>
+</div>

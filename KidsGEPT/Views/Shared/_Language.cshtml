@@ -1,0 +1,20 @@
+﻿@using KidsGEPT.Models
+@{
+    var data = ViewBag.Languages as IEnumerable<language>;
+}
+
+<!-- multiple lang dropdown : find all flags in the flags page -->
+<ul class="header-dropdown-list hidden-xs">
+    <li>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <img src="~/content/img/blank.gif" class="flag flag-tw" alt="Taiwan"> <span> 繁體中文 </span> <i class="fa fa-angle-down"></i> </a>
+        <ul class="dropdown-menu pull-right">
+            @foreach(language lang in data)
+            {
+            <li class="active">
+                <a href="javascript:void(0);"><img src="~/content/img/blank.gif" class="lang flag @lang.icon" data-c="@lang.langcode"> @lang.title</a>
+            </li>
+            }
+        </ul>
+    </li>
+</ul>
+<!-- end multiple lang -->

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f0a02d84902f4299ba632df09785f13e" Name="Diagram1">
+        <EntityTypeShape EntityType="KidsGEPTModel.Member" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="KidsGEPTModel.Schedule" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="KidsGEPTModel.School" Width="1.5" PointX="0.75" PointY="2.5" />
+        <EntityTypeShape EntityType="KidsGEPTModel.Score" Width="1.5" PointX="3" PointY="8.625" />
+        <EntityTypeShape EntityType="KidsGEPTModel.Special" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="KidsGEPTModel.Test" Width="1.5" PointX="5.25" PointY="1.375" />
+        <AssociationConnector Association="KidsGEPTModel.FK_Member_school" />
+        <AssociationConnector Association="KidsGEPTModel.FK_Test_Member" />
+        <AssociationConnector Association="KidsGEPTModel.FK_Test_Schedule" />
+        <AssociationConnector Association="KidsGEPTModel.FK_Test_Score" />
+        <EntityTypeShape EntityType="KidsGEPTModel.Basic" Width="1.5" PointX="11.625" PointY="2.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
